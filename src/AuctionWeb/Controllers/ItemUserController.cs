@@ -41,7 +41,7 @@ namespace AuctionWeb.Controllers
                 {
                     Bid = x.Bid
                 })
-                .OrderBy(x => x.Bid)
+                .OrderByDescending(x => x.Bid)
                 .FirstOrDefault();
             var bidUser = db.ItemUsers
                 .Where(x => x.AuctionItemId == auctionItemId)
@@ -67,7 +67,7 @@ namespace AuctionWeb.Controllers
                 {
                     Bid = x.Bid
                 })
-                .OrderBy(x => x.Bid)
+                .OrderByDescending(x => x.Bid)
                 .FirstOrDefault();
             return Ok(LargestBid);
 
