@@ -1,0 +1,36 @@
+﻿
+<div>
+    <div class="modal-header">
+        <img src="{{vm.auctionItem.imageUrl}}"  class='img-responsive img-rounded' alt="auctionItem.imageUrl">
+
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 offset-md-2">
+                <h4>Description: {{vm.auctionItem.description}}</h4>
+                <h4>Bid Limit: {{vm.auctionItem.numberOfBids}}</h4>
+                <h4>MinimumBid: {{vm.auctionItem.minimumBid}}</h4>
+                <h4>Users:</h4>
+                <div ng-repeat="user in vm.auctionItem.users">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer" >
+
+        <form ng-submit="vm.bid()">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="vm.ItemUser.bid" placeholder="0">
+                    <span ng-if="vm.erro">Please enter a bid Or Your bid is lower than minimumBid!</span>
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-success btn-block" value="Bid">
+                    <button class='btn btn-block btn-success btn-sm' ng-click='vm.closeModal()'>Close</button>
+                </div>
+            </div>
+        </form> 
+    </div>
+</div>

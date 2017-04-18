@@ -1,0 +1,28 @@
+﻿<div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail" ng-repeat="item in vm.auctionItems">
+                <img src="{{item.imageUrl}}" alt="item.imageUrl">
+                <div class="caption">
+                    <h3>Description</h3>
+                    <p>{{item.id}}</p>
+                    <p>{{item.description}}</p>
+                    <p>Bid Limit: {{item.numberOfBids}}</p>
+                    <p>MinimumBid: {{item.minimumBid}}</p>
+                    <a class="btn btn-primary" ng-click="vm.bid(item.id)" ng-if="item.disabledButton==false">Bid</a>
+                    <a class="btn btn-primary disabled" ng-if="item.disabledButton==true">Bid</a>
+                </div>
+                <h5>Bidded Users:</h5>
+                <div ng-repeat="user in item.biddedUsers">
+                        <tag>
+                            <h3>{{user}}</h3>
+                        </tag>                    
+                </div>
+                <div ng-show="item.disabledButton==true">
+                    <p>The winner is: </p>
+                    <p>{{(item.winnersName)[0] }} on {{item.winnersBiddedValue.bid|currency}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
