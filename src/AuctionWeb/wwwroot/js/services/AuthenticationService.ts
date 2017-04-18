@@ -43,10 +43,18 @@
                 });
         }
 
-        /**
-         * Validate the login and either sign in or not
-         * @param userLogin - Object containing the username and password of the prospective user
-         */
+        public logout(userLogin: Model.UserLogin): ng.IPromise<boolean>{
+            return this.$http.post('account/logOff', userLogin)
+                .then((response) => {
+                    this._user = response.data;
+                    this._isUserAuthenticated = false;
+                })
+                . catch(() => {
+                    console.log('logoff failed');
+                    return false;
+                });
+    }
+
         public register(userRegister: Model.UserRegister): ng.IPromise<boolean|void> {
 
             // Force logout of user

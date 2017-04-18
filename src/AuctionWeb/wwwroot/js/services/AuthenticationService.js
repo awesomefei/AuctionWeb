@@ -39,10 +39,18 @@ var AuctionApp;
                     return false;
                 });
             };
-            /**
-             * Validate the login and either sign in or not
-             * @param userLogin - Object containing the username and password of the prospective user
-             */
+            AuthenticationService.prototype.logout = function (userLogin) {
+                var _this = this;
+                return this.$http.post('account/logOff', userLogin)
+                    .then(function (response) {
+                    _this._user = response.data;
+                    _this._isUserAuthenticated = false;
+                })
+                    .catch(function () {
+                    console.log('logoff failed');
+                    return false;
+                });
+            };
             AuthenticationService.prototype.register = function (userRegister) {
                 var _this = this;
                 // Force logout of user

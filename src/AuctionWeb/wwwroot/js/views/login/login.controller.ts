@@ -11,7 +11,7 @@
             private $state: ng.ui.IStateService,
             private AuthenticationService: Services.AuthenticationService
         ) {
-            this.user = new Model.UserLogin('something', 'else');
+            this.user = new Model.UserLogin('', '');
         }
 
         public logUserIn(): void {

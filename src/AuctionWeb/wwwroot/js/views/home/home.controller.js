@@ -5,10 +5,12 @@ var AuctionApp;
         var Home;
         (function (Home) {
             var HomeController = (function () {
-                function HomeController($resource, $uibModal, authService) {
+                function HomeController($resource, $uibModal, authService, $state, AuthenticationService) {
                     this.$resource = $resource;
                     this.$uibModal = $uibModal;
                     this.authService = authService;
+                    this.$state = $state;
+                    this.AuthenticationService = AuthenticationService;
                     this.auctionItems = [];
                     this.bidUsersForEachItem = [];
                     this.AuctionResource = this.$resource('api/actionItems/:id');
@@ -16,6 +18,7 @@ var AuctionApp;
                     this.ItemUserForWinnersNameResource = this.$resource('api/itemUser/bid/:id');
                     this.ItemUserWinnersBiddedValueResource = this.$resource('api/itemUser/WinnersBiddedValue/:id');
                     this.getAuctionItems();
+                    this.User = new AuctionApp.Model.UserLogin('', '');
                 }
                 Object.defineProperty(HomeController.prototype, "user", {
                     get: function () {
@@ -24,6 +27,13 @@ var AuctionApp;
                     enumerable: true,
                     configurable: true
                 });
+                HomeController.prototype.logoff = function () {
+                    if (this.AuthenticationService.logout(this.User)) {
+                        this.$state.go('Home');
+                        return;
+                    }
+                    console.log('User failed to login');
+                };
                 HomeController.prototype.isUserLoggedIn = function () {
                     return this.authService.isUserAuthenticated();
                 };
@@ -75,7 +85,8 @@ var AuctionApp;
                 };
                 return HomeController;
             }());
-            HomeController.$inject = ['$resource', '$uibModal', 'AuthenticationService'];
+            HomeController.$inject = ['$resource', '$uibModal', 'AuthenticationService', '$state',
+                'AuthenticationService'];
             Home.HomeController = HomeController;
         })(Home = Views.Home || (Views.Home = {}));
     })(Views = AuctionApp.Views || (AuctionApp.Views = {}));

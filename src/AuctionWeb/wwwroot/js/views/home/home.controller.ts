@@ -1,13 +1,16 @@
 ﻿namespace AuctionApp.Views.Home {
 
     export class HomeController {
-        static $inject = ['$resource', '$uibModal', 'AuthenticationService'];
-        public auctionItems: AuctionItem[] = [];
+        static $inject = ['$resource', '$uibModal', 'AuthenticationService', '$state',
+            'AuthenticationService'];
+       public auctionItems: AuctionItem[] = [];
        private AuctionResource: ng.resource.IResourceClass<AuctionItem>;
        private ItemUserResource: ng.resource.IResourceClass<Model.ItemUserViewModel>;
        private ItemUserForWinnersNameResource: ng.resource.IResourceClass<Model.ItemUserViewModel>;
        private ItemUserWinnersBiddedValueResource: ng.resource.IResourceClass<Model.ItemUserViewModel>;
        private bidUsersForEachItem = [];
+       public User: Model.UserLogin;
+
        public get user(): Model.User {
            return this.authService.User;
        }
@@ -16,6 +19,8 @@
             private $resource: ng.resource.IResourceService,
             private $uibModal: ng.ui.bootstrap.IModalService,
             private authService: Services.AuthenticationService,
+            private $state: ng.ui.IStateService,
+            private AuthenticationService: Services.AuthenticationService
 
         ) {
             this.AuctionResource = this.$resource<AuctionItem>('api/actionItems/:id');
@@ -23,8 +28,15 @@
             this.ItemUserForWinnersNameResource = this.$resource<Model.ItemUserViewModel>('api/itemUser/bid/:id');
             this.ItemUserWinnersBiddedValueResource = this.$resource<Model.ItemUserViewModel>('api/itemUser/WinnersBiddedValue/:id');
             this.getAuctionItems();
+            this.User = new Model.UserLogin('', '');
         }
-
+        public logoff(): void {
+            if (this.AuthenticationService.logout(this.User)) {
+                this.$state.go('Home');
+                return;
+            }
+            console.log('User failed to login');
+        }
         public isUserLoggedIn(): boolean {
             return this.authService.isUserAuthenticated();
         }

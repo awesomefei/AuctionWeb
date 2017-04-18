@@ -8,7 +8,7 @@ var AuctionApp;
                 function LoginController($state, AuthenticationService) {
                     this.$state = $state;
                     this.AuthenticationService = AuthenticationService;
-                    this.user = new AuctionApp.Model.UserLogin('something', 'else');
+                    this.user = new AuctionApp.Model.UserLogin('', '');
                 }
                 LoginController.prototype.logUserIn = function () {
                     if (this.AuthenticationService.login(this.user)) {

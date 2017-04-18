@@ -25,7 +25,9 @@
                     <li><a ui-sref="Home"> home </a></li>
                     <li ng-show="vm.isUserLoggedIn()==false"><a ui-sref="Login"> Login </a></li>
                     <li ng-show="vm.isUserLoggedIn()==false"><a ui-sref="Register"> Register </a></li>
-                    <li ng-show="vm.isUserLoggedIn()==true"> <a>Welcome {{vm.user.userName}} </a></li>                    
+                    <li ng-show="vm.isUserLoggedIn()==true"> <a>Welcome {{vm.user.userName}} </a></li>   
+                    <li ng-show="vm.isUserLoggedIn()==true" ng-click="vm.logoff()"><a href="#"> Logout </a></li>
+                 
                 </ul>
             </div>
         </div><!-- /.container-fluid -->

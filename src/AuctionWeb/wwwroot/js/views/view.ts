@@ -3,6 +3,6 @@
         'app.login',
         'app.home',
         'app.register',
-        'app.bid'
+        'app.bid',
     ]);
 }

@@ -6,7 +6,7 @@ var AuctionApp;
             'app.login',
             'app.home',
             'app.register',
-            'app.bid'
+            'app.bid',
         ]);
     })(Views = AuctionApp.Views || (AuctionApp.Views = {}));
 })(AuctionApp || (AuctionApp = {}));

@@ -37,14 +37,21 @@
         }
         
         bid() {
-            this.ItemUser.auctionItemId = this.auctionItemId;
-            this.ItemUser.useriId = this.user.id;
-            if (this.ItemUser.bid != 0 && this.ItemUser.bid >= this.auctionItem.minimumBid) {
+             if (this.ItemUser.useriId == null || this.ItemUser.useriId == '') {
+                 alert('Please Login First');
+                 this.closeModal();
+                 this.$state.go('Login');
+                 return;
+            }else if (this.ItemUser.bid != 0 && this.ItemUser.bid >= this.auctionItem.minimumBid) {
                 this.ItemUserResource.save(this.ItemUser);
                 this.closeModal();
-            } else {
+            }
+              else {
                 this.erro = true;
             }
+            this.ItemUser.auctionItemId = this.auctionItemId;
+            this.ItemUser.useriId = this.user.id;
+          
         }
     }
 }
