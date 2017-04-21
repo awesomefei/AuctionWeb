@@ -31,7 +31,7 @@ var AuctionApp;
                     return this.auctionItem = this.AuctionResource.get({ 'id': id });
                 };
                 BidController.prototype.bid = function () {
-                    if (this.ItemUser.useriId == null || this.ItemUser.useriId == '') {
+                    if (!this.authService.isUserAuthenticated) {
                         alert('Please Login First');
                         this.closeModal();
                         this.$state.go('Login');

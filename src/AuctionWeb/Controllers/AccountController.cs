@@ -93,7 +93,7 @@ namespace AuctionWeb.Controllers
             return BadRequest(model);
         }
 
-        //
+        
         // POST: /Account/LogOff
         [HttpPost]
         public async Task<IActionResult> LogOff()
